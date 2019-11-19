@@ -1,7 +1,7 @@
 #include <iostream>
 #include <stack>
 #include <list>
-//                  not sure if reference string needs to be string (stack or list is easier)
+                    // not sure if reference string needs to be string (stack or list is easier)
 #include <time.h>
 
 #include "FIFO.h" // First In First Out algorithmn
@@ -25,6 +25,6 @@ int main() {
         s_rString.push(page_num);
     }
 
-    std::cout << "Hello, World!" << std::endl;
+    cout << "Hello, World!" << endl;
     return 0;
 }
