@@ -1,18 +1,19 @@
 #include <iostream>
+#include <vector>
 #include <stack>
 #include <list>
                     // not sure if reference string needs to be string (stack or list is easier)
 #include <time.h>
 
-#include "FIFO.h" // First In First Out algorithmn
-#include "OPT.h" // Optimal algorithmn
-#include "LRU.h" // Least Recently Used algorithmn
+#include "FIFO.h" // First In First Out algorithm
+#include "OPT.h" // Optimal algorithm
+#include "LRU.h" // Least Recently Used algorithm
 
 using namespace std;
 
-void FIFO_Algorithmn(); // executes all functions from FIFO class
-void OPT_Algorithmn(); // executes all functions from OPT class
-void LRU_Algorithmn(); // executes all functions from LRU class
+void FIFO_Algorithm(); // executes all functions from FIFO class
+void OPT_Algorithm(); // executes all functions from OPT class
+void LRU_Algorithm(); // executes all functions from LRU class
 
 list<int> l_rString;
 stack<int> s_rString;
@@ -32,21 +33,21 @@ int main() {
 
     cout << "Hello, World!" << endl;
 
-    FIFO_Algorithmn();
+    FIFO_Algorithm();
 
     return 0;
 }
 
-void FIFO_Algorithmn() {
+void FIFO_Algorithm() {
     FIFO fifo;
     fifo.set_frames(page_frames);
     fifo.set_string(l_rString);
 }
 
-void OPT_Algorithmn() {
+void OPT_Algorithm() {
     //
 }
 
-void LRU_Algorithmn() {
+void LRU_Algorithm() {
     //
 }
