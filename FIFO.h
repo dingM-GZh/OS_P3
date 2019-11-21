@@ -9,7 +9,6 @@
 #ifndef OS_P3_FIFO_H
 #define OS_P3_FIFO_H
 using namespace std;
-#define MAX_PAGES 100
 
 class FIFO {
 private:
@@ -35,7 +34,7 @@ public:
         int page_table[page_frames];
 
         for (int i = 0; i < this->page_frames; i++) {
-            page_table[i] =  ref_string.front();
+            page_table[i] = ref_string.front();
             page_faults++;
             ref_string.pop_front();
             cout << page_table[i] << '\t';
@@ -45,12 +44,14 @@ public:
         int index = 0, page;
         while (!ref_string.empty()) {
             page = ref_string.front();
+
             for (int i = 0; i < page_frames; i++) {
                 if (page == page_table[i]) {
                     found = true;
                     break;
                 }
             }
+
             if (!found) { // not found (found == false)
                 page_table[index % 5] = page;
                 page_faults++;

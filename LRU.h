@@ -4,10 +4,9 @@
 #include <iostream>
 #include <deque>
 
-using namespace std;
-
 #ifndef OS_P3_LRU_H
 #define OS_P3_LRU_H
+using namespace std;
 
 class LRU {
 private:
@@ -34,7 +33,7 @@ public:
 
         for (int i = 0; i < page_frames; i++) {
             page_table[i] = ref_string.front();
-            counter[i] = 0;
+            counter[i] = 1;
             page_faults++;
             ref_string.pop_front();
 
@@ -45,15 +44,16 @@ public:
         }
         cout << endl;
 
-        int page_index = 0, counter_index, page;
+        int page_index = 0, counter_index, page, replace;
         while (!ref_string.empty()) {
             page = ref_string.front();
-            counter_index = 0;
+            counter_index = 0, replace = -1;
 
             for (int i = 0; i < page_frames; i++) {
                 if (page == page_table[i]) {
                     found = true;
                     counter[i] = 0;
+                    replace = i;
                     //cout << "MATCH" << endl;
                 }
                 else {
@@ -61,8 +61,17 @@ public:
                         page_index = i;
                         counter_index = i;
                     }
-                    counter[i]++;
                 }
+            }
+
+            for (int i = 0; i < page_frames; i++) {
+                cout << page_table[i] << "\t" << counter[i] << endl;
+            }
+            cout << "--------------------"            << endl;
+
+            for (int i = 0; i < page_frames; i++) {
+                if (i != replace)
+                    counter[i]++;
             }
 
             if (!found) {

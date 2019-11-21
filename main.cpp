@@ -21,7 +21,7 @@ void print_string();
 
 deque<int> ref_string;
 ofstream fout("report.txt");
-int fault_counter = 0, page_frames = 5; // DELETE TEMP AMOUNT
+int fault_counter = 0, page_frames = 3; // DELETE TEMP AMOUNT
 
 void display_table(int arr[]) {
     cout << "TABLE -\t";
@@ -31,14 +31,44 @@ void display_table(int arr[]) {
     cout << endl;
 }
 
+void hw_string() {
+    // 7, 2, 3, 1, 2,
+    ref_string.push_back(7);
+    ref_string.push_back(2);
+    ref_string.push_back(3);
+    ref_string.push_back(1);
+    ref_string.push_back(2);
+    // 5, 3, 4, 6, 7,
+    ref_string.push_back(5);
+    ref_string.push_back(3);
+    ref_string.push_back(4);
+    ref_string.push_back(6);
+    ref_string.push_back(7);
+    // 7, 1, 0, 5, 4,
+    ref_string.push_back(7);
+    ref_string.push_back(1);
+    ref_string.push_back(0);
+    ref_string.push_back(5);
+    ref_string.push_back(4);
+    // 6, 2, 3, 0, 1
+    ref_string.push_back(6);
+    ref_string.push_back(2);
+    ref_string.push_back(3);
+    ref_string.push_back(0);
+    ref_string.push_back(1);
+
+}
+
 int main() {
     srand(time(NULL));
 
-    gen_string();
+    //gen_string();
+    hw_string();
+
 
     fout << "Frames -\t" << page_frames << endl << endl;
 
-    //FIFO_Algorithm();
+    FIFO_Algorithm();
     //OPT_Algorithm();
     LRU_Algorithm();
 
