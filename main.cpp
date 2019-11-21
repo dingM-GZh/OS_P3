@@ -17,6 +17,7 @@ void OPT_Algorithm(); // executes all functions from OPT class
 void LRU_Algorithm(); // executes all functions from LRU class
 
 void gen_string();
+void print_string();
 
 deque<int> ref_string;
 ofstream fout("report.txt");
@@ -29,7 +30,7 @@ void display_table(int arr[]) {
     }
     cout << endl;
 }
-//FIFO fifo;
+
 int main() {
     srand(time(NULL));
 
@@ -37,8 +38,8 @@ int main() {
 
     fout << "Frames -\t" << page_frames << endl << endl;
 
-    FIFO_Algorithm();
-    OPT_Algorithm();
+    //FIFO_Algorithm();
+    //OPT_Algorithm();
     LRU_Algorithm();
 
     fout.flush();
@@ -52,6 +53,10 @@ void gen_string() {
         page_num = rand() % 50; // provides integer from 0 to 49
         ref_string.push_back(page_num);
     }
+}
+
+void print_string() {
+    //
 }
 
 void FIFO_Algorithm() {

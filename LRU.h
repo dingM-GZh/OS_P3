@@ -31,21 +31,49 @@ public:
     void load_pages() {
         cout << "Last Recently Used" << endl;
         int page_table[page_frames], counter[page_frames];
+
         for (int i = 0; i < page_frames; i++) {
             page_table[i] = ref_string.front();
             counter[i] = 0;
             page_faults++;
             ref_string.pop_front();
 
-            for (int j = i - 1; j > -1; j--) {
+            for (int j = i - 1; j > -1; j--)
                 counter[j]++;
-                cout << i << " : " << endl
-                     << "counter " << j << " -\t" << counter[j] << endl;
-            }
 
-            //cout << page_table[i] << '\t';
+            cout << page_table[i] << "\t";
         }
         cout << endl;
+
+        int page_index = 0, counter_index, page;
+        while (!ref_string.empty()) {
+            page = ref_string.front();
+            counter_index = 0;
+
+            for (int i = 0; i < page_frames; i++) {
+                if (page == page_table[i]) {
+                    found = true;
+                    counter[i] = 0;
+                    //cout << "MATCH" << endl;
+                }
+                else {
+                    if (counter[i] > counter[counter_index]) {
+                        page_index = i;
+                        counter_index = i;
+                    }
+                    counter[i]++;
+                }
+            }
+
+            if (!found) {
+                page_table[page_index] = page;
+                counter[counter_index] = 0;
+                page_faults++;
+            }
+
+            ref_string.pop_front();
+            found = false;
+        }
 
         cout << "Page faults -\t" << page_faults << endl << endl;
     }

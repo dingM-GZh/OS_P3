@@ -53,7 +53,7 @@ public:
             }
             if (!found) { // not found (found == false)
                 page_table[index % 5] = page;
-                page_faults ++;
+                page_faults++;
                 index++;
             }
             ref_string.pop_front();
