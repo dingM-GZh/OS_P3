@@ -39,7 +39,7 @@ public:
 
             for (int j = i - 1; j > -1; j--)
                 counter[j]++;
-            
+
         }
 
         int page_index = 0, counter_index, page, replace;

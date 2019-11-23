@@ -37,9 +37,7 @@ public:
             page_table[i] = ref_string.front();
             page_faults++;
             ref_string.pop_front();
-            cout << page_table[i] << '\t';
         }
-        cout << endl;
 
         int index = 0, page;
         while (!ref_string.empty()) {
@@ -51,14 +49,15 @@ public:
                     break;
                 }
             }
-
+            /*
             for (int i = 0; i < page_frames; i++) {
                 cout << page_table[i] << endl;
             }
             cout << "--------------------" << endl;
+            */
 
             if (!found) { // not found (found == false)
-                page_table[index % 5] = page;
+                page_table[index % page_frames] = page;
                 page_faults++;
                 index++;
             }
