@@ -42,19 +42,17 @@ public:
 
             cout << page_table[i] << "\t";
         }
-        cout << endl;
+        cout << endl << page_faults << endl;
 
         int page_index = 0, counter_index, page, replace;
         while (!ref_string.empty()) {
-            page = ref_string.front();
-            counter_index = 0, replace = -1;
+            page_index = 0, page = ref_string.front(), counter_index = 0, replace = -1;
 
             for (int i = 0; i < page_frames; i++) {
                 if (page == page_table[i]) {
                     found = true;
                     counter[i] = 0;
                     replace = i;
-                    //cout << "MATCH" << endl;
                 }
                 else {
                     if (counter[i] > counter[counter_index]) {
@@ -67,7 +65,7 @@ public:
             for (int i = 0; i < page_frames; i++) {
                 cout << page_table[i] << "\t" << counter[i] << endl;
             }
-            cout << "--------------------"            << endl;
+            cout << "--------------------" << endl;
 
             for (int i = 0; i < page_frames; i++) {
                 if (i != replace)
