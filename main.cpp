@@ -7,7 +7,7 @@
 
 #include "FIFO.h" // First In First Out algorithm
 #include "OPT.h" // Optimal algorithm
-#include "LRU.h" // Least Recently Used algorithm
+#include "LRU.h" // Last Recently Used algorithm
 
 #define MAX_PAGES 100
 #define SEED (time(NULL))
