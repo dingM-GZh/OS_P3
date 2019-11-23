@@ -3,6 +3,8 @@
 //
 #include <iostream>
 #include <deque>
+#include <cstdlib>
+#include <stdlib.h>
 
 #ifndef OS_P3_LRU_H
 #define OS_P3_LRU_H
@@ -12,7 +14,7 @@ class LRU {
 private:
     int page_faults = 0, page_frames;
     deque<int> ref_string;
-    bool found =  false;
+    bool found;
 
 public:
     int get_faults() {
@@ -45,6 +47,14 @@ public:
         int page_index = 0, counter_index, page, replace;
         while (!ref_string.empty()) {
             page_index = 0, page = ref_string.front(), counter_index = 0, replace = -1;
+            found = false;
+
+            /*
+            for (int i = 0; i < page_frames; i++) {
+                cout << page_table[i] << "\t" << counter[i] << endl;
+            }
+            cout << "--------------------" << endl;
+             */
 
             for (int i = 0; i < page_frames; i++) {
                 if (page == page_table[i]) {
@@ -60,12 +70,6 @@ public:
                 }
             }
 
-            /*
-            for (int i = 0; i < page_frames; i++) {
-                cout << page_table[i] << "\t" << counter[i] << endl;
-            }
-            cout << "--------------------" << endl;
-             */
 
             for (int i = 0; i < page_frames; i++) {
                 if (i != replace)
@@ -79,7 +83,7 @@ public:
             }
 
             ref_string.pop_front();
-            found = false;
+
         }
 
         cout << "Page faults -\t" << page_faults << endl << endl;

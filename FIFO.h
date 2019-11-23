@@ -3,8 +3,8 @@
 //
 #include <iostream>
 #include <deque>
-#include <stack>
-#include <list>
+#include <cstdlib>
+#include <stdlib.h>
 
 #ifndef OS_P3_FIFO_H
 #define OS_P3_FIFO_H
@@ -14,7 +14,7 @@ class FIFO {
 private:
     int page_faults = 0, page_frames;
     deque<int> ref_string;
-    bool found =  false;
+    bool found;
 
 public:
     int get_faults() {
@@ -33,7 +33,9 @@ public:
         cout << "First In First Out" << endl;
         int page_table[page_frames];
 
-        for (int i = 0; i < this->page_frames; i++) {
+
+
+        for (int i = 0; i < page_frames; i++) {
             page_table[i] = ref_string.front();
             page_faults++;
             ref_string.pop_front();
@@ -42,13 +44,8 @@ public:
         int index = 0, page;
         while (!ref_string.empty()) {
             page = ref_string.front();
+            found = false;
 
-            for (int i = 0; i < page_frames; i++) {
-                if (page == page_table[i]) {
-                    found = true;
-                    break;
-                }
-            }
             /*
             for (int i = 0; i < page_frames; i++) {
                 cout << page_table[i] << endl;
@@ -56,13 +53,19 @@ public:
             cout << "--------------------" << endl;
             */
 
+            for (int i = 0; i < page_frames; i++) {
+                if (page == page_table[i]) {
+                    found = true;
+                    break;
+                }
+            }
+
             if (!found) { // not found (found == false)
                 page_table[index % page_frames] = page;
                 page_faults++;
                 index++;
             }
             ref_string.pop_front();
-            found = false;
         }
         cout << "Page faults -\t" << page_faults << endl << endl;
     }

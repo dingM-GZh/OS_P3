@@ -1,7 +1,8 @@
 #include <iostream>
+#include <cstdlib>
+#include <stdlib.h>
 #include <deque>
 #include <fstream>
-#include <iterator>
 #include <time.h>
 
 #include "FIFO.h" // First In First Out algorithm
@@ -9,6 +10,7 @@
 #include "LRU.h" // Least Recently Used algorithm
 
 #define MAX_PAGES 100
+#define SEED 12
 
 using namespace std;
 
@@ -18,19 +20,13 @@ void LRU_Algorithm(); // executes all functions from LRU class
 
 void gen_string();
 void print_string();
+void print_results(int, int);
 
 deque<int> ref_string;
 ofstream fout("report.txt");
-int fault_counter = 0, page_frames = 3; // DELETE TEMP AMOUNT
+int page_frames; //= 3; // DELETE TEMP AMOUNT
 
-void display_table(int arr[]) {
-    cout << "TABLE -\t";
-    for(int i = 0; i < page_frames; i++) {
-        cout << arr[i] << "\t";
-    }
-    cout << endl;
-}
-
+/*
 void hw_string() {
     // 7, 2, 3, 1, 2,
     ref_string.push_back(7);
@@ -58,18 +54,21 @@ void hw_string() {
     ref_string.push_back(1);
 
 }
+ */
 
-int main() {
+int main(int argc, char *argv[]) {
     srand(time(NULL));
+    page_frames = atoi(argv[1]);
 
-    //gen_string();
-    hw_string();
+    gen_string();
+    //hw_string();
+    print_string();
 
-
+    cout << "Frames -\t" << page_frames << endl << endl;
     fout << "Frames -\t" << page_frames << endl << endl;
 
     FIFO_Algorithm();
-    //OPT_Algorithm();
+    OPT_Algorithm();
     LRU_Algorithm();
 
     fout.flush();
@@ -86,7 +85,28 @@ void gen_string() {
 }
 
 void print_string() {
-    //
+    fout << "Page Reference String - " << ref_string.size() << endl;
+    for (int i = 0; i < ref_string.size(); i++) {
+        fout << ref_string[i] << ' ';
+    }
+    fout << endl << endl;
+}
+
+void print_results(int algorithm, int faults) {
+    switch (algorithm) {
+        case 1:
+            fout << "First In First Out" << endl;
+            break;
+        case 2:
+            fout << "Last Recently Used" << endl;
+            break;
+        case 3:
+            fout << "Optimal" << endl;
+            break;
+        default:
+            cout << "ERROR - ALGORITHM DOESN'T EXIST" << endl;
+    }
+    fout << "Page faults -\t" << faults << endl << endl;
 }
 
 void FIFO_Algorithm() {
@@ -95,13 +115,16 @@ void FIFO_Algorithm() {
     fifo.set_string(ref_string);
     fifo.load_pages();
 
-    fout << "First In First Out" << endl
-         << "Page faults -\t" << fifo.get_faults() << endl << endl;
+    print_results(1, fifo.get_faults());
 }
 
 void OPT_Algorithm() {
     OPT opt;
-    //opt.set_frames(page_frames);
+    opt.set_frames(page_frames);
+    opt.set_string(ref_string);
+    opt.load_pages();
+
+    print_results(3, opt.get_faults());
 }
 
 void LRU_Algorithm() {
@@ -110,6 +133,5 @@ void LRU_Algorithm() {
     lru.set_string(ref_string);
     lru.load_pages();
 
-    fout << "Last Recently Used" << endl
-         << "Page faults -\t" << lru.get_faults() << endl << endl;
+    print_results(2, lru.get_faults());
 }
