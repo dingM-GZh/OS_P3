@@ -39,10 +39,8 @@ public:
 
             for (int j = i - 1; j > -1; j--)
                 counter[j]++;
-
-            cout << page_table[i] << "\t";
+            
         }
-        cout << endl << page_faults << endl;
 
         int page_index = 0, counter_index, page, replace;
         while (!ref_string.empty()) {
@@ -62,10 +60,12 @@ public:
                 }
             }
 
+            /*
             for (int i = 0; i < page_frames; i++) {
                 cout << page_table[i] << "\t" << counter[i] << endl;
             }
             cout << "--------------------" << endl;
+             */
 
             for (int i = 0; i < page_frames; i++) {
                 if (i != replace)

@@ -52,6 +52,11 @@ public:
                 }
             }
 
+            for (int i = 0; i < page_frames; i++) {
+                cout << page_table[i] << endl;
+            }
+            cout << "--------------------" << endl;
+
             if (!found) { // not found (found == false)
                 page_table[index % 5] = page;
                 page_faults++;
