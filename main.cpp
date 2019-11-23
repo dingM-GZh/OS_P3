@@ -10,7 +10,7 @@
 #include "LRU.h" // Last Recently Used algorithm
 
 #define MAX_PAGES 100
-#define SEED (time(NULL))
+#define SEED 20 //(time(NULL))
 
 using namespace std;
 
@@ -73,8 +73,8 @@ int main(int argc, char *argv[]) {
         fout << "Frames -\t" << page_frames << endl << endl;
 
         FIFO_Algorithm();
-        OPT_Algorithm();
         LRU_Algorithm();
+        OPT_Algorithm();
     }
 
     fout.flush();
@@ -86,6 +86,8 @@ void gen_string() {
     int page_num; // randomly generated page number
     for (int i = 0; i < MAX_PAGES; i++) {
         page_num = rand() % 50; // provides integer from 0 to 49
+        if (page_num >= 49)
+            cout << page_num << endl;
         ref_string.push_back(page_num);
     }
 }
