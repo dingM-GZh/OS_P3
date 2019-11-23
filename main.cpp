@@ -10,7 +10,7 @@
 #include "LRU.h" // Least Recently Used algorithm
 
 #define MAX_PAGES 100
-#define SEED 12
+#define SEED (time(NULL))
 
 using namespace std;
 
@@ -57,19 +57,25 @@ void hw_string() {
  */
 
 int main(int argc, char *argv[]) {
-    srand(time(NULL));
+    srand(SEED);
     page_frames = atoi(argv[1]);
 
-    gen_string();
-    //hw_string();
-    print_string();
+    if (page_frames < 1) {
+        cout << "ERROR - INVALID NUMBER OF PAGE FRAMES" << endl
+             << "PLEASE ENTER AN INTEGER GREATER THAN 0" << endl;
+    }
+    else {
+        gen_string();
+        //hw_string();
+        print_string();
 
-    cout << "Frames -\t" << page_frames << endl << endl;
-    fout << "Frames -\t" << page_frames << endl << endl;
+        cout << "Frames -\t" << page_frames << endl << endl;
+        fout << "Frames -\t" << page_frames << endl << endl;
 
-    FIFO_Algorithm();
-    OPT_Algorithm();
-    LRU_Algorithm();
+        FIFO_Algorithm();
+        OPT_Algorithm();
+        LRU_Algorithm();
+    }
 
     fout.flush();
     fout.close();
