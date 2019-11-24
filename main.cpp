@@ -64,6 +64,10 @@ int main(int argc, char *argv[]) {
         cout << "ERROR - INVALID NUMBER OF PAGE FRAMES" << endl
              << "PLEASE ENTER AN INTEGER GREATER THAN 0" << endl;
     }
+    else if (page_frames > 30) {
+        cout << "ERROR - INVALID NUMBER OF PAGE FRAMES" << endl
+             << "PLEASE ENTER AN INTEGER LESS THAN 0" << endl;
+    }
     else {
         gen_string();
         //hw_string();
